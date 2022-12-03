@@ -1,9 +1,9 @@
-/// <reference path="utility.ts" />
-/// <reference path="result.ts" />
-/// <reference path="player.ts" />
-/// <reference path="scoreboard.ts" />
+import { Player } from "./player";
+import { Scoreboard } from "./scoreboard";
+import { Result } from "./result";
+import { getValue } from "./utility";
 
-class Game {
+export class Game {
   private scoreboard: Scoreboard = new Scoreboard();
 
   // Lovely shorthand for our constructor
@@ -34,13 +34,12 @@ class Game {
     // enable the calculate score button
     document.getElementById("calculate")!.removeAttribute("disabled");
   }
-
   calculateScore(): void {
     let score: number = 0;
 
-    // loop through the text boxes and calculate the number that are corret
-    for (let i = 1; i < this.problemCount; i++) {
-      const answer: number = Number(Utility.getInputValue("answer" + i));
+    // loop through the text boxes and calculate the number that are correct
+    for (let i = 1; i <= this.problemCount; i++) {
+      const answer: number = Number(getValue("answer" + i));
       if (i * this.factor === answer) {
         score++;
       }
@@ -54,6 +53,7 @@ class Game {
       factor: this.factor,
     };
 
+    // add the result and update the scoreboard
     this.scoreboard.addResult(result);
     this.scoreboard.updateScoreboard();
 
