@@ -19,7 +19,6 @@ module.exports = {
   output: {
     filename: "bundle.js",
   },
-
   devServer: {
     static: {
       directory: path.join(__dirname, "/"),
